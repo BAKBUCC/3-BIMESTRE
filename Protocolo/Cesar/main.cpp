@@ -1,67 +1,47 @@
 #include <iostream>
 #include <Cesar.h>
-#include <stdlib.h>
-#include<time.h>
 
-using namespace std;
+
 
 int main()
 {
     string *str=new string;
-    int *clave=new int;
-    int *i=new int;
-    *i=1;
 
-    while(*str!="chao")
-    {
-        cout<<"  comp_"<<*i<<endl;
+    Cesar emisor;
+    Cesar receptor;
 
-        cout<<" ________\n";
-        cout<<"| ------ |\n";
-        cout<<"| |    | |\n";
-        cout<<"| ------ |\n";
-        cout<<" --------\n";
-        cout<<"    | |\n";
-        cout<<"------------\n";
+    cout<<"comp_Emisora"<<endl;
+    cout<<"  ________\n";
+    cout<<" | ------ |\n";
+    cout<<" | |    | |\n";
+    cout<<" | ------ |\n";
+    cout<<"  --------\n";
+    cout<<"     | |\n";
+    cout<<" ------------\n";
 
-        cout<<"escriba su mensaje: ";
-        getline(cin, *str);
-        srand(time(NULL));
-        *clave=rand()%(26);
-        cout<<endl;
-        Cesar c(*str, *clave);
-        c.Codificacion();
+    cout<<"escriba su mensaje: ";
+    getline(cin, *str);
 
-        cout<<"\t|\n";
-        cout<<"\t|\n";
-        cout<<"\t|\tCodificando con clave: "<<*clave<<": "<<*str<<endl;
-        cout<<"\t|\n";
-        cout<<"\tV\n\n";
+    cout<<endl;
 
-        if(*i==1)
-        {
-            *i=2;
-        }
-        else if(*i==2)
-        {
-            *i=1;
-        }
+    *str=emisor.Codificacion(*str);
 
-        cout<<"  comp_"<<*i<<endl;
-        cout<<" ________\n";
-        cout<<"| ------ |\n";
-        cout<<"| |    | |\n";
-        cout<<"| ------ |\n";
-        cout<<" --------\n";
-        cout<<"    | |\n";
-        cout<<"------------\n";
-        c.Decodificacion();
-        cout<<"mensaje recibido: "<<*str<<endl;
+    cout<<"\t|\n";
+    cout<<"\t|\n";
+    cout<<"\t|\tCodificando con clave: "<<*str<<endl;
+    cout<<"\t|\n";
+    cout<<"\tV\n\n";
 
-        system("PAUSE()");
-        system("cls");
-    }
+    cout<<"comp_Receptora"<<endl;
+    cout<<"  ________\n";
+    cout<<" | ------ |\n";
+    cout<<" | |    | |\n";
+    cout<<" | ------ |\n";
+    cout<<"  --------\n";
+    cout<<"     | |\n";
+    cout<<" ------------\n";
+    *str=receptor.Decodificacion(*str);
+    cout<<"mensaje recibido: "<<*str<<endl;
+
     delete str;
-    delete clave;
-    delete i;
 }

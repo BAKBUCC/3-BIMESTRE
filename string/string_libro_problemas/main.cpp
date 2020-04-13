@@ -9,42 +9,35 @@ using namespace std;
 
 void rot13(string &refString)
 {
+    int resto;
     for(int unsigned i=0; i<refString.length(); i++)
     {
         if(refString.at(i)!=' ')
         {
             if(refString.at(i)>='A' && refString.at(i)<='Z')
             {
-                if(refString.at(i)<'M')//M es el numero 77
+                if(13<=('Z'-refString.at(i)))
                 {
                     refString.at(i)+=13;
-                    cout<<refString.at(i);
                 }
                 else
                 {
-                    int resto=13-('Z'-refString.at(i));
+                    resto=13-('Z'-refString.at(i));
                     refString.at(i)='@'+resto;//si A sería 1, @ sería el 0
-                    cout<<refString.at(i);
                 }
             }
             else
             {
-                if(refString.at(i)<'m')//M es el numero 77
+                if(13<=('z'-refString.at(i)))
                 {
                     refString.at(i)+=13;
-                    cout<<refString.at(i);
                 }
                 else
                 {
-                    int resto=13-('z'-refString.at(i));
+                    resto=13-('z'-refString.at(i));
                     refString.at(i)='`'+resto;//si A sería 1, @ sería el 0
-                    cout<<refString.at(i);
                 }
             }
-        }
-        else
-        {
-            cout<<" ";
         }
     }
 }
@@ -273,7 +266,7 @@ int main()
 {
     string m=("Se tu mismo");
     rot13(m);
-    cout<<endl;
+    cout<<m<<endl;
         /*
     18.21 Escriba un programa que introduzca una línea de texto, reemplace todos los signos de puntuación con espacios y utilice
     la función strtok de la biblioteca de cadenas estilo C para dividir el objeto string en palabras individuales (tokens).
@@ -316,6 +309,7 @@ int main()
 
     //b)
     cout<<"solo 13 personas lo han descubierto, solo tienes que volver a hacia atrás."<<endl;
+    cin.ignore();
     //c) a la primera pregunta responderé que sería muy difícil ya que estaría derivando en muchísimas posibilidades
     //a la segunda pregunta resposderé que sería un poco más facil ya que podría poner funciones con todos los descifradores que
     //han existido e haría imprimir los resultados solo cuando exista una oración con sentido.
@@ -362,6 +356,7 @@ int main()
     cin>>palabra;
     insert_mitad(palabra);
     cout<<palabra<<endl;
+    cin.ignore();
 
     /*
     18.27 Escriba una versión de la rutina de ordenamiento por selección (figura 8.28) que ordene objetos string. Use la función

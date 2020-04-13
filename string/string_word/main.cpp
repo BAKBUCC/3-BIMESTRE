@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -108,6 +111,47 @@ void comparacion(string comp_1, string comp_2)
             cout<<comp_1<<" < "<<comp_2<<endl;
         }
     }
+}
+
+void escribir_arch_numeros()
+{
+    srand(time(NULL));
+    int cant=rand()%(10);
+    ofstream archivo;
+    archivo.open("numeros.txt", ios::out);
+    if(archivo.fail())
+    {
+        cout<<"no se pudo abrir el archivo"<<endl;
+        exit(1);
+    }
+    for(int i=0; i<=cant; i++)
+    {
+        int num=rand()%(1000);
+        archivo<<num<<" ";
+    }
+    archivo.close();
+}
+
+int leer_arch_numeros()
+{
+    int suma;
+    int num=0;
+    ifstream archivo;
+    archivo.open("numeros.txt", ios::in);
+    if(archivo.fail())
+    {
+        cout<<"no se pudo abrir el archivo"<<endl;
+        exit(1);
+    }
+    archivo>>num;
+    while(!archivo.eof())
+    {
+        suma+=num;
+        cout<<num<<endl;
+        archivo>>num;
+    }
+    archivo.close();
+    return suma;
 }
 
 int main()
@@ -256,15 +300,16 @@ int main()
     cin>>comp_2;
     comparacion(comp_1, comp_2);
 
+    cin.ignore();
     /*
     12.	Crear una función que reciba un número N (N va de 1 a 10), y que
         escriba N números con valores que van de 1 a 1000 en un archivo llamado “numeros.txt”.
     */
 
-
+    escribir_arch_numeros();
 
     /*
     13.	Leer los números en el archivo “numeros.txt” de la pregunta 10 e imprimir la sumatoria.
     */
-
+    cout<<"la suma de los numeros dentro del archivo \"numeros.txt\" es :"<<leer_arch_numeros()<<endl;
 }

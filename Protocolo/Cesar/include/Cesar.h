@@ -3,18 +3,19 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include<time.h>
 
 using namespace std;
 
 class Cesar
 {
-    string *str=new string;
-    int *clave=new int;
+    int clave;
     int *resto=new int;
     public:
-        Cesar(string&, int&);
-        void Codificacion();
-        void Decodificacion();
+        Cesar();
+        string Codificacion(string);
+        string Decodificacion(string);
         virtual ~Cesar();
 };
 
