@@ -38,6 +38,28 @@ void aqui_cada_10(string &refString)
 
 int main()
 {
+//    string alfabeto="ÇüéâäàåçêëèïîìÄÅÉæÆôöòûù®ÖÜø£Ø×ƒ !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+//                        "`abcdefghijklmnopqrstuvwxyz{|}~";
+//    cout<<alfabeto.length()<<endl;
+//    cout<<alfabeto.find('a')<<endl;
+//    string alfabeto_Num = "abcdefghijklmnopqrstuvwxyz -ABCDEFGHIJKLMNOPQRSTUVWXYZ,.0123456789";
+//    cout<<alfabeto_Num.length()<<endl;
+    //shzGQVERrG-PoN3DqptxG4nLwziAYkkrC9iOe7uvsQiLGrvRWDICPqM0vq xwY9epjumNS5orRl2Gt7ovsXpHtsxGCrCSGoLWyGDxePUhvpnCzL4wdNk8NgxddfQlBolIGNxRLDMC1ujyxCG3trthgQGmarDofKho6ohXnTwjPAOBGDvJY1y-HFvIgdvcnvzKj
+    string texto;
+    cout<<"texto cifrado:";
+    getline(cin,texto);
+    Vigenere receptor(texto);
+    string des = receptor.decodificacion_con_alfNum();
+    cout<<"\n\nmensaje decodificado con alfabeto numerico: "<<des<<endl;
+
+    cout<<"\n~     ~";
+    cout<<"\n0     0";
+    cout<<"\n   ?";
+    cout<<"\n(     )";
+    cout<<"\n -----";
+
+
+
     //ingreso de texto plano por archivo
 //    string frase=leer_archivo();
 
@@ -49,6 +71,7 @@ int main()
 "Puedo escribir los versos mas tristes esta noche. "
 "Yo la quise, y a veces ella tambien me quiso.");
 
+
     //para agregar a la frase los "AQUI" descomente la sgte. linea
     //aqui_cada_10(frase);
     string c,d;
@@ -57,14 +80,14 @@ int main()
 
     cout<<"\nmensaje original: "<<frase<<endl;
 
-    cout<<"\n\n¿Qué alfabeto quiere utilizar?: \n(1)Alf. Numerico \n(2)Codico ASCII\n(3)utilizar de CODIGO: codigo más mensaje\n\n";
+    cout<<"\n\n¿Qué alfabeto quiere utilizar?: \n(1)Alf. Numerico \n(2)Codico ASCII\n(3)Codico HEX \n(4)utilizar de CODIGO: codigo más mensaje\n\n";
     int num;
     cin>>num;
 
     if(num==1)
     {
         c = emisor.codificacion_con_alfNum();
-        cout<<"\n\nmensaje codificado con alfabeto numerico: "<<c<<endl;
+        cout<<"\n\nmensaje codificado con alfabeto numerico:"<<c<<endl;
 
         Vigenere receptor(c);
         d = receptor.decodificacion_con_alfNum();
@@ -81,6 +104,15 @@ int main()
     }
     if(num==3)
     {
+        c = emisor.codificacion_con_alfHEX();
+        cout<<"\n\nmensaje codificado con HEX: "<<c<<endl;
+
+        Vigenere receptor(c);
+        d = receptor.decodificacion_con_alfHEX();
+        cout<<"\n\nmensaje decodificado con HEX: "<<d<<endl;
+    }
+    if(num==4)
+    {
         c = emisor.codificacion_Codigo_Mensaje();
         cout<<"\n\nmensaje codificado con codigo más mensaje: "<<c<<endl;
 
@@ -91,3 +123,5 @@ int main()
 
     return 0;
 }
+
+
