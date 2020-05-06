@@ -10,13 +10,19 @@ using namespace std;
 
 class Cesar
 {
-    int clave;
-    int *resto=new int;
+    int resto, pos, mod, j, total;
+    string c, d, str;
+
     public:
-        Cesar();
-        string Codificacion(string);
-        string Decodificacion(string);
-        virtual ~Cesar();
+        Cesar(string);
+        string Codificacion();
+        string Decodificacion();
+        string alfabeto_Num = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ,.";
+        string Codificacion_Alf();
+        string Decodificacion_Alf();
+
+    private:
+        int clave=3;
 };
 
 #endif // CESAR_H

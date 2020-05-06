@@ -5,10 +5,8 @@
 
 int main()
 {
-    string *str=new string;
+    string m,c,d;
 
-    Cesar emisor;
-    Cesar receptor;
 
     cout<<"comp_Emisora"<<endl;
     cout<<"  ________\n";
@@ -20,17 +18,21 @@ int main()
     cout<<" ------------\n";
 
     cout<<"escriba su mensaje: ";
-    getline(cin, *str);
+    getline(cin, m);
+
+    Cesar emisor(m);
 
     cout<<endl;
 
-    *str=emisor.Codificacion(*str);
+    c=emisor.Codificacion_Alf();
 
     cout<<"\t|\n";
     cout<<"\t|\n";
-    cout<<"\t|\tCodificando con clave: "<<*str<<endl;
+    cout<<"\t|\tCodificando con clave: "<<c<<endl;
     cout<<"\t|\n";
     cout<<"\tV\n\n";
+
+    Cesar receptor(c);
 
     cout<<"comp_Receptora"<<endl;
     cout<<"  ________\n";
@@ -40,8 +42,8 @@ int main()
     cout<<"  --------\n";
     cout<<"     | |\n";
     cout<<" ------------\n";
-    *str=receptor.Decodificacion(*str);
-    cout<<"mensaje recibido: "<<*str<<endl;
+    d=receptor.Decodificacion_Alf();
+    cout<<"mensaje recibido: "<<d<<endl;
 
-    delete str;
+
 }

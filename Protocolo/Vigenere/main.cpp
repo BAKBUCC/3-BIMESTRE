@@ -44,7 +44,29 @@ int main()
 //    cout<<alfabeto.find('a')<<endl;
 //    string alfabeto_Num = "abcdefghijklmnopqrstuvwxyz -ABCDEFGHIJKLMNOPQRSTUVWXYZ,.0123456789";
 //    cout<<alfabeto_Num.length()<<endl;
-    //shzGQVERrG-PoN3DqptxG4nLwziAYkkrC9iOe7uvsQiLGrvRWDICPqM0vq xwY9epjumNS5orRl2Gt7ovsXpHtsxGCrCSGoLWyGDxePUhvpnCzL4wdNk8NgxddfQlBolIGNxRLDMC1ujyxCG3trthgQGmarDofKho6ohXnTwjPAOBGDvJY1y-HFvIgdvcnvzKj
+
+//    cout<<"{\"";
+//    for(int i=0; i<80; i++)
+//    {
+//        cout<<i<<"\",\"";
+//        if((i+1)%10==0)
+//        {
+//            for(char j=65; j<71; j++)
+//            {
+//                if(i/10==0)
+//                {
+//                    cout<<j<<"\",\"";
+//                }
+//                else
+//                {
+//                    cout<<i/10<<j<<"\",\"";
+//                }
+//            }
+//        }
+//    }
+//    cout<<"}"<<endl;
+
+
     string texto;
     cout<<"texto cifrado:";
     getline(cin,texto);

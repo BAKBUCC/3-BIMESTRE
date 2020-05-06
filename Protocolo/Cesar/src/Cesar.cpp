@@ -1,12 +1,14 @@
 #include "Cesar.h"
 
 
-Cesar::Cesar()
+Cesar::Cesar(string m)
 {
-    clave=3;
+    str=m;
+    c.resize( str.length());
+    d.resize( str.length());
 }
 
-string Cesar::Codificacion(string  str)
+string Cesar::Codificacion()
 {
     for(int unsigned i=0; i<str.length(); i++)
     {
@@ -20,8 +22,8 @@ string Cesar::Codificacion(string  str)
                 }
                 else
                 {
-                    *resto=clave-('Z'-str.at(i));
-                    str.at(i)='@'+ *resto;//si A sería 1, @ sería el 0
+                    resto=clave-('Z'-str.at(i));
+                    str.at(i)='@'+ resto;//si A sería 1, @ sería el 0
                 }
             }
             else
@@ -32,8 +34,8 @@ string Cesar::Codificacion(string  str)
                 }
                 else
                 {
-                    *resto=clave-('z'- str.at(i));
-                    str.at(i)='`'+*resto;//si A sería 1, @ sería el 0
+                    resto=clave-('z'- str.at(i));
+                    str.at(i)='`'+resto;//si A sería 1, @ sería el 0
                 }
             }
         }
@@ -41,7 +43,7 @@ string Cesar::Codificacion(string  str)
     return str;
 }
 
-string Cesar::Decodificacion(string str)
+string Cesar::Decodificacion()
 {
     for(int unsigned i=0; i<str.length(); i++)
     {
@@ -55,8 +57,8 @@ string Cesar::Decodificacion(string str)
                 }
                 else
                 {
-                    *resto=clave-((str.at(i))-'A');
-                    str.at(i)='['- *resto;//si Z sería 26, [ sería el 27
+                    resto=clave-((str.at(i))-'A');
+                    str.at(i)='['- resto;//si Z sería 26, [ sería el 27
                 }
             }
             else
@@ -67,8 +69,8 @@ string Cesar::Decodificacion(string str)
                 }
                 else
                 {
-                    *resto=clave-((str.at(i))-'a');
-                    str.at(i)='{'-*resto;//si z sería 26, { sería el 27
+                    resto=clave-((str.at(i))-'a');
+                    str.at(i)='{'-resto;//si z sería 26, { sería el 27
                 }
             }
         }
@@ -76,7 +78,36 @@ string Cesar::Decodificacion(string str)
     return str;
 }
 
-Cesar::~Cesar()
+string Cesar::Codificacion_Alf()
 {
-    delete resto;
+    j=0;
+    for(string::const_iterator i = str.begin(); i!=str.end(); i++)
+    {
+        pos = alfabeto_Num.find(*i);
+        pos+=clave;
+        mod=pos%(alfabeto_Num.length());
+        c[j]=alfabeto_Num[mod];
+        j++;
+    }
+    return c;
 }
+
+string Cesar::Decodificacion_Alf()
+{
+    total=alfabeto_Num.length();
+    j=0;
+    for(string::const_iterator i = str.begin(); i!=str.end(); i++)
+    {
+        pos = alfabeto_Num.find(*i);
+        pos-=clave;
+        mod=pos%total;
+        if(mod<0)
+        {
+            mod=total+mod;
+        }
+        c[j]=alfabeto_Num[mod];
+        j++;
+    }
+    return c;
+}
+
