@@ -1,14 +1,16 @@
 #include <iostream>
+#include "Tools.h"
 #include <NTL/ZZ.h>
 
 using namespace std;
 using namespace NTL;
 
+Tools h;
 
 ZZ Algoritmo_1(ZZ a, ZZ b, int i)
 {
     ZZ *r=new ZZ;
-    *r=a%b;
+    *r=h.modulo(a,b);
 
     if(*r==0)
     {
@@ -28,13 +30,13 @@ ZZ Algoritmo_2(ZZ a, ZZ b, int i)
 {
 
     ZZ *r=new ZZ;
-    *r=a%b;
+    *r=h.modulo(a,b);
 
     if(*r==0)
     {
         return b;
     }
-    if(*r>b/2)
+    if(*r>b/2) // aqui poner bitset
     {
         *r=b-*r;
     }
@@ -53,7 +55,7 @@ ZZ Algoritmo_3(ZZ  a, ZZ  b, int i)
         return a;
     }
     i++;
-    return Algoritmo_3(b,a%b,i);
+    return Algoritmo_3(b,h.modulo(a,b),i);
 }
 
 ZZ Algoritmo_4(ZZ  a, ZZ  b, int i)
@@ -74,17 +76,17 @@ ZZ Algoritmo_4(ZZ  a, ZZ  b, int i)
     {
         return a;
     }
-    else if(a%2==0 && b%2==0)
+    else if(h.modulo(a,2)==0 && h.modulo(b,2)==0)
     {
-        return 2*Algoritmo_4(a/2,b/2,i);
+        return 2*Algoritmo_4(a/2,b/2,i);// aqui poner bitset
     }
-    else if(a%2==0 && b%2==1)
+    else if(h.modulo(a,2)==0 && h.modulo(b,2)==1)
     {
-        return Algoritmo_4(a/2,b,i);
+        return Algoritmo_4(a/2,b,i);// aqui poner bitset
     }
-    else if(a%2==1 && b%2==0)
+    else if(h.modulo(a,2)==1 && h.modulo(b,2)==0)
     {
-        return Algoritmo_4(a,b/2,i);
+        return Algoritmo_4(a,b/2,i);// aqui poner bitset
     }
     else
     {
@@ -98,7 +100,7 @@ ZZ Algoritmo_4(ZZ  a, ZZ  b, int i)
         {
             b=-b;
         }
-        return Algoritmo_4((a-b)/2,*y,i);
+        return Algoritmo_4((a-b)/2,*y,i);// aqui poner bitset
         delete y;
     }
 }
@@ -108,7 +110,7 @@ ZZ Algoritmo_5(ZZ  x, ZZ  y, int i)
     i++;
     ZZ *g= new ZZ;
     *g=1;
-    while(x%2==0 && y%2==0)
+    while(h.modulo(x,2)==0 && h.modulo(y,2)==0)
     {
         i++;
         x=x/2;
@@ -118,11 +120,11 @@ ZZ Algoritmo_5(ZZ  x, ZZ  y, int i)
     while(x!=0)
     {
         i++;
-        while(x%2==0)
+        while(h.modulo(x,2)==0)
         {
             x=x/2;
         }
-        while(y%2==0)
+        while(h.modulo(y,2)==0)
         {
             y=y/2;
         }
@@ -151,7 +153,7 @@ ZZ Algoritmo_5(ZZ  x, ZZ  y, int i)
     delete g;
 }
 
-ZZ Algoritmo_6(ZZ a, ZZ b, int i)
+ZZ Algoritmo_6(ZZ a, ZZ b, int i) //este es muy lento
 {
     while(a!=b)
     {
@@ -177,7 +179,7 @@ ZZ Algoritmo_Propuesta(ZZ a, ZZ b)
     mcd=1;
     while(n<a && n<b)
     {
-        if(a%n==0 && b%n==0)
+        if(h.modulo(a,n)==0 && h.modulo(b,n)==0)
         {
             mcd*=n;
             a/=n;

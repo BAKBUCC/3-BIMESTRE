@@ -34,8 +34,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Tools.h" />
 		<Unit filename="include/Vigenere.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Tools.cpp" />
 		<Unit filename="src/Vigenere.cpp" />
 		<Extensions>
 			<code_completion />

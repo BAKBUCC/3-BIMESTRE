@@ -2,27 +2,19 @@
 #define CESAR_H
 
 #include <iostream>
-#include <string>
-#include <stdlib.h>
-#include<time.h>
-
-using namespace std;
+#include "Tools.h"
 
 class Cesar
 {
-    int resto, pos, mod, j, total;
-    string c, d, str;
+    int pos, mod, j, total,cl;
+    string nuevoMensaje;
+    Tools h;
 
     public:
-        Cesar(string);
-        string Codificacion();
-        string Decodificacion();
-        string alfabeto_Num = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ,.";
-        string Codificacion_Alf();
-        string Decodificacion_Alf();
-
-    private:
-        int clave=3;
+        Cesar(int,string);
+        string alf;
+        string Codificacion_Alf(string);
+        string Decodificacion_Alf(string);
 };
 
 #endif // CESAR_H

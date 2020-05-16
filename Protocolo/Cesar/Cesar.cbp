@@ -35,8 +35,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Cesar.h" />
+		<Unit filename="include/Tools.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Cesar.cpp" />
+		<Unit filename="src/Tools.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

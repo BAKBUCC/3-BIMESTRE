@@ -1,14 +1,8 @@
 #include <iostream>
 #include <Cesar.h>
 
-
-
-int main()
+void dibujar_comp()
 {
-    string m,c,d;
-
-
-    cout<<"comp_Emisora"<<endl;
     cout<<"  ________\n";
     cout<<" | ------ |\n";
     cout<<" | |    | |\n";
@@ -16,15 +10,25 @@ int main()
     cout<<"  --------\n";
     cout<<"     | |\n";
     cout<<" ------------\n";
+}
 
+string alfabeto_Num = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ,.";
+
+int main()
+{
+    string m,c,d;
+    int clave=3;
+
+    cout<<"comp_Emisora"<<endl;
+    dibujar_comp();
     cout<<"escriba su mensaje: ";
     getline(cin, m);
 
-    Cesar emisor(m);
+    Cesar emisor(clave,alfabeto_Num);
 
     cout<<endl;
 
-    c=emisor.Codificacion_Alf();
+    c=emisor.Codificacion_Alf(m);
 
     cout<<"\t|\n";
     cout<<"\t|\n";
@@ -32,18 +36,10 @@ int main()
     cout<<"\t|\n";
     cout<<"\tV\n\n";
 
-    Cesar receptor(c);
+    Cesar receptor(clave,alfabeto_Num);
 
     cout<<"comp_Receptora"<<endl;
-    cout<<"  ________\n";
-    cout<<" | ------ |\n";
-    cout<<" | |    | |\n";
-    cout<<" | ------ |\n";
-    cout<<"  --------\n";
-    cout<<"     | |\n";
-    cout<<" ------------\n";
-    d=receptor.Decodificacion_Alf();
+    dibujar_comp();
+    d=receptor.Decodificacion_Alf(c);
     cout<<"mensaje recibido: "<<d<<endl;
-
-
 }

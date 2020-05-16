@@ -1,113 +1,49 @@
 #include "Cesar.h"
 
 
-Cesar::Cesar(string m)
+Cesar::Cesar(int clave, string abc)
 {
-    str=m;
-    c.resize( str.length());
-    d.resize( str.length());
+    cl=clave;
+    alf=abc;
+    total=alf.length();
 }
 
-string Cesar::Codificacion()
+string Cesar::Codificacion_Alf(string mensaje)
 {
-    for(int unsigned i=0; i<str.length(); i++)
-    {
-        if(str.at(i)!=' ')
-        {
-            if(str.at(i)>='A' && str.at(i)<='Z')
-            {
-                if( clave <= ('Z'- str.at(i)) )
-                {
-                    str.at(i)+=clave;
-                }
-                else
-                {
-                    resto=clave-('Z'-str.at(i));
-                    str.at(i)='@'+ resto;//si A sería 1, @ sería el 0
-                }
-            }
-            else
-            {
-                if( clave <= ('z'- str.at(i)) )
-                {
-                    str.at(i)+=clave;
-                }
-                else
-                {
-                    resto=clave-('z'- str.at(i));
-                    str.at(i)='`'+resto;//si A sería 1, @ sería el 0
-                }
-            }
-        }
-    }
-    return str;
-}
-
-string Cesar::Decodificacion()
-{
-    for(int unsigned i=0; i<str.length(); i++)
-    {
-        if(str.at(i)!=' ')
-        {
-            if(str.at(i)>='A' && str.at(i)<='Z')
-            {
-                if( clave <= (str.at(i))-'A')
-                {
-                    str.at(i)-=clave;
-                }
-                else
-                {
-                    resto=clave-((str.at(i))-'A');
-                    str.at(i)='['- resto;//si Z sería 26, [ sería el 27
-                }
-            }
-            else
-            {
-                if( clave <= (str.at(i))-'a' )
-                {
-                    str.at(i)-=clave;
-                }
-                else
-                {
-                    resto=clave-((str.at(i))-'a');
-                    str.at(i)='{'-resto;//si z sería 26, { sería el 27
-                }
-            }
-        }
-    }
-    return str;
-}
-
-string Cesar::Codificacion_Alf()
-{
+    nuevoMensaje.resize( mensaje.length());
     j=0;
-    for(string::const_iterator i = str.begin(); i!=str.end(); i++)
+
+    for(string::const_iterator i = mensaje.begin(); i!=mensaje.end(); i++)
     {
-        pos = alfabeto_Num.find(*i);
-        pos+=clave;
-        mod=pos%(alfabeto_Num.length());
-        c[j]=alfabeto_Num[mod];
+        pos = alf.find(*i);
+
+        pos += cl;
+
+        mod = h.modulo(pos,total);
+
+        nuevoMensaje[j]=alf[mod];
+
         j++;
     }
-    return c;
+    return nuevoMensaje;
 }
 
-string Cesar::Decodificacion_Alf()
+string Cesar::Decodificacion_Alf(string mensaje_cifrado)
 {
-    total=alfabeto_Num.length();
+    nuevoMensaje.resize( mensaje_cifrado.length());
     j=0;
-    for(string::const_iterator i = str.begin(); i!=str.end(); i++)
+
+    for(string::const_iterator i = mensaje_cifrado.begin(); i != mensaje_cifrado.end(); i++)
     {
-        pos = alfabeto_Num.find(*i);
-        pos-=clave;
-        mod=pos%total;
-        if(mod<0)
-        {
-            mod=total+mod;
-        }
-        c[j]=alfabeto_Num[mod];
+        pos = alf.find(*i);
+
+        pos -= cl;
+
+        mod = h.modulo(pos,total);
+        cout<<mod<<endl;
+
+        nuevoMensaje[j] = alf[mod];
         j++;
     }
-    return c;
+    return nuevoMensaje;
 }
-

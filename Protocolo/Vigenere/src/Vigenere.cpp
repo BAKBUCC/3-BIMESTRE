@@ -1,173 +1,150 @@
 #include "Vigenere.h"
 
-Vigenere::Vigenere(string str)
+Vigenere::Vigenere(string clave, string abc)
 {
-    m =str;
-    c.resize( m.length());
-    d.resize( m.length());
-
+    cl=clave;
+    alf=abc;
+    total = alf.length();
 }
 
-string Vigenere::codificacion_con_alfNum()
+string Vigenere::codificacion_con_alfPuesto(string mensaje)
 {
-    for(i=0, l=0; i<m.length(); i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    for(i = mensaje.begin(),l = cl.begin(), j=0; i!=mensaje.end(); i++,l++,j++)
     {
-        if (l==clave.length())
+        if (l!=cl.end())
         {
-            l=0;
+            l=cl.begin();
         }
-        suma=alfabeto_Num.find(m[i])+alfabeto_Num.find(clave[l]);
-        mod=suma%(alfabeto_Num.length());
-        c[i]=alfabeto_Num[mod];
+        suma = alf.find(*i) + alf.find (*l);
+
+        mod = h.modulo(suma,total);
+
+        nuevoMensaje[j]=alf[mod];
     }
-    return c;
+    return nuevoMensaje;
 }
-string Vigenere::decodificacion_con_alfNum()
+string Vigenere::decodificacion_con_alfPuesto(string mensaje)
 {
-    total=alfabeto_Num.length();
-    for(i=0, l=0; i<m.length(); i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    for(i = mensaje.begin(),l = cl.begin(), j=0; i!=mensaje.end(); i++,l++,j++)
     {
-        if (l==clave.length())
+        if (l!=cl.end())
         {
-            l=0;
+            l=cl.begin();
         }
-        resta=alfabeto_Num.find(m[i])-alfabeto_Num.find(clave[l]);
-        mod=resta%total;
-        if(mod<0)
-        {
-            mod=total+mod;
-        }
-        d[i]=alfabeto_Num[mod];
+
+        resta = alf.find(*i) - alf.find(*l);
+
+        mod = h.modulo(resta,total);
+
+        nuevoMensaje[j]=alf[mod];
     }
-    return d;
+    return nuevoMensaje;
 }
 
-string Vigenere::codificacion_con_alfASCII()
+string Vigenere::codificacion_con_alfHEX(string mensaje)
 {
-    for(i=0, l=0; i<m.length(); i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    for(i = mensaje.begin(),l = cl.begin(), j=0; i!=mensaje.end(); i++,l++,j++)
     {
-        if (l==clave.length())
+        if (l!=cl.end())
         {
-            l=0;
-        }
-        suma=alfabeto.find(m[i])+alfabeto.find(clave[l]);
-        mod=suma%alfabeto.length();
-        c[i]=alfabeto[mod];
-    }
-    return c;
-}
-string Vigenere::decodificacion_con_alfASCII()
-{
-    total=alfabeto.length();
-    for(i=0, l=0; i<m.length(); i++,l++)
-    {
-        if (l==clave.length())
-        {
-            l=0;
-        }
-        resta=alfabeto.find(m[i])-alfabeto.find(clave[l]);
-        mod=resta%total;
-        if(mod<0)
-        {
-            mod=total+mod;
-        }
-        d[i]=alfabeto[mod];
-    }
-    return d;
-}
-
-string Vigenere::codificacion_con_alfHEX()
-{
-    for(i=0, l=0; i<m.length(); i++,l++)
-    {
-        if (l==clave.length())
-        {
-            l=0;
+            l=cl.begin();
         }
         cout<<showbase<<hex;
-        suma=alfabeto.find(m[i])+alfabeto.find(clave[l]);
-        mod=suma%alfabeto.length();;
-        c[i]=alfabeto[mod];
+
+        suma = alf.find(*i) + alf.find(*l);
+
+        mod = h.modulo(suma,total);
+
+        nuevoMensaje[j] = alf[mod];
+
         cout<<showbase<<dec;
     }
-    return c;
+    return nuevoMensaje;
 }
-string Vigenere::decodificacion_con_alfHEX()
+string Vigenere::decodificacion_con_alfHEX(string mensaje)
 {
-    total=alfabeto.length();
-    for(i=0, l=0; i<m.length(); i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    for(i = mensaje.begin(),l = cl.begin(), j=0; i!=mensaje.end(); i++,l++,j++)
     {
-        if (l==clave.length())
+        if (l!=cl.end())
         {
-            l=0;
+            l=cl.begin();
         }
+
         cout<<showbase<<hex;
-        resta=alfabeto.find(m[i])-alfabeto.find(clave[l]);
-        mod=resta%total;
-        if(mod<0)
-        {
-            mod=total+mod;
-        }
-        d[i]=alfabeto[mod];
+
+        resta = alf.find(*i) - alf.find(*l);
+
+        mod = h.modulo(resta,total);
+
+        nuevoMensaje[j] = alf[mod];
+
         cout<<showbase<<dec;
     }
-    return d;
+    return nuevoMensaje;
 }
 
-string Vigenere::codificacion_Codigo_Mensaje()
+string Vigenere::codificacion_Codigo_y_luego_Mensaje(string mensaje)
 {
-    mensaje=false;
-    for(i=0, l=0; i<m.length() ; i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    activo_m = false;
+
+    for(i = mensaje.begin(),l = cl.begin(), j=0; i!=mensaje.end(); i++,l++,j++)
     {
-        if(mensaje==true)
+        if(activo_m==true)
         {
-            suma=alfabeto_Num.find(m[i])+alfabeto_Num.find(m[l]);
+            suma = alf.find(*i) + alf.find(*l);
         }
         else
         {
-            if (i==clave.length())
+            if (l==cl.end())
             {
-                l=0;
-                mensaje=true;
+                activo_m=true;
+                l=mensaje.begin();
+                l--;
+                i--;
+                j--;
             }
             else
             {
-                suma=alfabeto_Num.find(m[i])+alfabeto_Num.find(clave[l]);
+                suma = alf.find(*i)+alf.find(*l);
             }
         }
-        mod=suma%66;
-        c[i]=alfabeto_Num[mod];
+
+        mod=h.modulo(suma,total);
+
+        nuevoMensaje[j] = alf[mod];
     }
-    return c;
+    return nuevoMensaje;
 }
-string Vigenere::decodificacion_Codigo_Mensaje()
+
+string Vigenere::decodificacion_Codigo_y_luego_Mensaje(string mensaje)
 {
-    for(i=0, l=0; l<clave.length() ; i++,l++)
+    nuevoMensaje.resize( mensaje.length());
+    for(i = mensaje.begin(),l = cl.begin(), j=0; l<cl.end(); i++,l++,j++)
     {
-        resta=alfabeto_Num.find(m[i])-alfabeto_Num.find(clave[l]);
-        mod=resta%66;
-        if(mod<0)
-        {
-            mod=66+mod;
-        }
-        d[i]=alfabeto_Num[mod];
+        resta = alf.find(*i) - alf.find(*l);
+
+        mod = h.modulo(resta,total);
+
+        nuevoMensaje[j]=alf[mod];
     }
-    l=0;
-    while(i<m.length())
+
+    l=nuevoMensaje.begin();
+
+    while( i < mensaje.end() )
     {
-        for(int unsigned j=0 ; j<clave.length() && i<m.length();i++,l++,j++)
+        for( int unsigned m=0; m<cl.length() && i!=mensaje.end() ; i++,l++,j++,m++)
         {
-            resta=alfabeto_Num.find(m[i])-alfabeto_Num.find(d[l]);
-            mod=resta%66;
-            if(mod<0)
-            {
-                mod=66+mod;
-            }
-            d[i]=alfabeto_Num[mod];
+            resta = alf.find(*i) - alf.find(*l);
+
+            mod = h.modulo(resta,total);
+
+            nuevoMensaje[j]=alf[mod];
         }
     }
-    return d;
+    return nuevoMensaje;
 }
-
-
-
