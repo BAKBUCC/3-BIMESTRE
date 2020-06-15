@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Tools.h"
 #include <NTL/ZZ.h>
+#include <ctime>
+
 
 using namespace std;
 using namespace NTL;
@@ -173,24 +175,23 @@ ZZ Algoritmo_6(ZZ a, ZZ b, int i) //este es muy lento
 
 ZZ Algoritmo_Propuesta(ZZ a, ZZ b)
 {
-    ZZ n;
-    n=2;
-    ZZ mcd;
-    mcd=1;
-    while(n<a && n<b)
+    ZZ r;
+    r=h.modulo(a,b);
+    while(r!=0)
     {
-        if(h.modulo(a,n)==0 && h.modulo(b,n)==0)
+        r=h.modulo(a,b);
+        if(r==0)
         {
-            mcd*=n;
-            a/=n;
-            b/=n;
+            return b;
         }
-        else
+        if(r > (b>>1))
         {
-            n++;
+            r=b-r;
         }
+
+        a=b;
+        b=r;
     }
-    return mcd;
 }
 
 int main()
@@ -202,25 +203,73 @@ int main()
     cin>>b;
     //b=260;
     int i=0;
+    unsigned t0, t1;
+
+    t0=clock();
     cout<<"ALGORITMO 1"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_1(a,b,i)<<endl;
+    t1 = clock();
+
+    double time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+    t0=clock();
     cout<<"\n\nALGORITMO 2"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_2(a,b,i)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+
+    t0=clock();
     cout<<"\n\nALGORITMO 3"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_3(a,b,i)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+
+    t0=clock();
     cout<<"\n\nALGORITMO 4"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_4(a,b,i)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+
+    t0=clock();
     cout<<"\n\nALGORITMO 5"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_5(a,b,i)<<endl;
-    cout<<"\n\nALGORITMO 6"<<endl;
-    cout<<"-----------"<<endl;
-    cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_6(a,b,i)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+
+    t0=clock();
     cout<<"\n\nALGORITMO 7"<<endl;
     cout<<"-----------"<<endl;
     cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_Propuesta(a,b)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
+    t0=clock();
+    cout<<"\n\nALGORITMO 6"<<endl;
+    cout<<"-----------"<<endl;
+    cout<<"mcd de "<<a<<" y "<<b<<" : "<<Algoritmo_6(a,b,i)<<endl;
+    t1 = clock();
+
+    time = (double(t1-t0)/CLOCKS_PER_SEC);
+    cout << "Execution Time: " << time << endl;
+
 }

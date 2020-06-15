@@ -1,18 +1,16 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
-#include <NTL/ZZ.h>
-#include <iostream>
+#include <string>
+
 using namespace std;
-using namespace NTL;
 
 class Tools
 {
     public:
-        ZZ q,r;
+        int q,r;
         Tools();
-        ZZ modulo(ZZ,ZZ);
-        ZZ modulo(ZZ,int);
+        int modulo(int,int);
 
     protected:
 

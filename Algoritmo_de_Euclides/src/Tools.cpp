@@ -7,35 +7,35 @@ Tools::Tools()
 
 ZZ Tools::modulo(ZZ a,ZZ n)
 {
-    if(n>0)
+    if(n<0)
     {
-        q=a/n;
-
-        r = a-(n*q);
-
-        if(r<0)
-        {
-            r = a-(n*(q-1));//con esto noo permitimos que el residuo sea 0
-        }
-
-        return r;
+        cout << "n es menor a 0" << endl;
+        return n;
     }
+    q = a / n;
+    r = a - (q * n);
+    if (r < 0)
+    {
+        q--;
+        r = a - (q * n);
+    }
+    return r;
 }
 
 ZZ Tools::modulo(ZZ a,int n)
 {
-    if(n>0)//solo puede ser positivo
+    if(n<0)
     {
-        q=a/n;
-
-        r = a-(n*q);
-
-        if(r<0)
-        {
-            r = a-(n*(q-1));//con esto noo permitimos que el residuo sea 0
-        }
-
-        return r;
+        cout << "n es menor a 0" << endl;
+        return a;
     }
+    q = a / n;
+    r = a - (q * n);
+    if (r < 0)
+    {
+        q--;
+        r = a - (q * n);
+    }
+    return r;
 }
 
